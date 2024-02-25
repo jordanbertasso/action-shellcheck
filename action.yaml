@@ -203,6 +203,8 @@ runs:
             -type f ! -name '*.*' -perm /111 \
             -print0)
 
+        echo "filepaths=${filepaths[@]}" >> $GITHUB_OUTPUT
+
         if [[ -n "${INPUT_CHECK_TOGETHER}" ]]; then
           "${{ github.action_path }}/shellcheck" \
             ${INPUT_SHELLCHECK_OPTIONS} \
@@ -215,7 +217,6 @@ runs:
           done
         fi
 
-        echo "filepaths=${filepaths[@]}" >> $GITHUB_OUTPUT
         echo "statuscode=$statuscode" >> $GITHUB_OUTPUT
 
         set +f # re-enable globbing
